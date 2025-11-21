@@ -2,23 +2,17 @@
   "name": "pace-course-equivalency",
   "version": "1.0.0",
   "description": "Pace University Course Equivalency Search Application",
-  "main": "api/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node api/index.js",
-    "client": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
-    "start": "node api/index.js",
+    "start": "react-scripts start",
     "vercel-build": "react-scripts build"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0",
-    "react-scripts": "5.0.1",
-    "xlsx": "^0.18.5"
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",

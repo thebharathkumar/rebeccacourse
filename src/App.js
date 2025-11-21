@@ -6,17 +6,19 @@ const API_BASE = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:
 // Search Bar Component
 function SearchBar({ value, onChange }) {
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
+    <div className="relative w-full max-w-3xl mx-auto fade-in">
+      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
       <input
         type="text"
-        placeholder="Search courses, programs, or course codes..."
+        placeholder="Search by course name, code, or program..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 text-lg text-gray-800 bg-white border-2 border-gray-200 rounded-xl shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+        className="search-input pl-14"
       />
-      <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
     </div>
   );
 }
@@ -34,23 +36,28 @@ function FilterPanel({ filters, selected, onChange, onReset }) {
   const hasActiveFilters = Object.values(selected).some(v => v);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="font-semibold text-gray-800">Filters</h3>
+    <div className="filter-card p-6 fade-in">
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center gap-2">
+          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <h3 className="text-lg font-bold text-gray-800">Filters</h3>
+        </div>
         {hasActiveFilters && (
-          <button onClick={onReset} className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-            Reset All
+          <button onClick={onReset} className="btn-secondary">
+            ✕ Reset All
           </button>
         )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {filterConfig.map(({ key, label, options }) => (
           <div key={key}>
-            <label className="block text-sm font-medium text-gray-600 mb-1">{label}</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">{label}</label>
             <select
               value={selected[key] || ''}
               onChange={(e) => onChange(key, e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-200 outline-none"
+              className="filter-select"
             >
               <option value="">All</option>
               {options.map((opt, i) => (
@@ -84,49 +91,53 @@ function ResultsTable({ courses, sort, onSort }) {
 
   if (courses.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
-        <p className="text-gray-500">No courses found matching your criteria.</p>
+      <div className="results-card p-16 text-center fade-in">
+        <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p className="text-xl font-semibold text-gray-600 mb-2">No courses found</p>
+        <p className="text-gray-500">Try adjusting your search or filters</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div className="results-card fade-in">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-100">
+          <thead className="bg-gradient-to-r from-gray-50 to-blue-50/30 border-b-2 border-gray-200">
             <tr>
               {columns.map(({ key, label }) => (
                 <th
                   key={key}
                   onClick={() => handleSort(key)}
-                  className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                  className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-blue-100/50 transition-colors duration-200"
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     {label}
                     {sort.key === key && (
-                      <span>{sort.order === 'asc' ? '↑' : '↓'}</span>
+                      <span className="text-blue-600 text-sm">{sort.order === 'asc' ? '↑' : '↓'}</span>
                     )}
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody>
             {courses.map((course, idx) => (
-              <tr key={course.id || idx} className="hover:bg-gray-50">
-                <td className="px-4 py-3 text-sm text-gray-800">{course.foreign_course_title}</td>
-                <td className="px-4 py-3 text-sm text-gray-600">{course.foreign_course_code}</td>
-                <td className="px-4 py-3 text-sm text-gray-600 text-center">{course.foreign_course_credits}</td>
-                <td className="px-4 py-3 text-sm text-gray-800">{course.home_course_title}</td>
-                <td className="px-4 py-3 text-sm text-gray-600">{course.home_course_code}</td>
-                <td className="px-4 py-3 text-sm text-gray-600">{course.study_abroad_program}</td>
-                <td className="px-4 py-3">
+              <tr key={course.id || idx} className="table-row">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.foreign_course_title}</td>
+                <td className="px-6 py-4 text-sm text-gray-600 font-mono">{course.foreign_course_code}</td>
+                <td className="px-6 py-4 text-sm text-gray-600 text-center font-semibold">{course.foreign_course_credits}</td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.home_course_title}</td>
+                <td className="px-6 py-4 text-sm text-gray-600 font-mono">{course.home_course_code}</td>
+                <td className="px-6 py-4 text-sm text-gray-700">{course.study_abroad_program}</td>
+                <td className="px-6 py-4">
                   {course.aok && course.aok.split(',').map((a, i) => (
                     <span key={i} className="tag-aok">{a.trim()}</span>
                   ))}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-6 py-4">
                   {course.pace_school && <span className="tag-school">{course.pace_school}</span>}
                 </td>
               </tr>
@@ -134,8 +145,18 @@ function ResultsTable({ courses, sort, onSort }) {
           </tbody>
         </table>
       </div>
-      <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 text-sm text-gray-500">
-        Showing {courses.length} course{courses.length !== 1 ? 's' : ''}
+      <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-blue-50/30 border-t-2 border-gray-200">
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-semibold text-gray-700">
+            Showing <span className="text-blue-600">{courses.length}</span> course{courses.length !== 1 ? 's' : ''}
+          </p>
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Click column headers to sort</span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -152,10 +173,18 @@ function HomePage() {
 
   // Fetch filter options
   useEffect(() => {
-    fetch(`${API_BASE}/api/filters`, { credentials: 'include' })
-      .then(r => r.json())
-      .then(setFilters)
-      .catch(console.error);
+    fetch(`${API_BASE}/api/filters`)
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to fetch filters');
+        return r.json();
+      })
+      .then(data => {
+        console.log('Filters loaded:', data);
+        setFilters(data);
+      })
+      .catch(err => {
+        console.error('Error loading filters:', err);
+      });
   }, []);
 
   // Fetch courses with debounce
@@ -173,13 +202,21 @@ function HomePage() {
       params.set('order', sort.order);
     }
 
-    fetch(`${API_BASE}/api/courses?${params}`, { credentials: 'include' })
-      .then(r => r.json())
+    console.log('Fetching courses with params:', params.toString());
+    fetch(`${API_BASE}/api/courses?${params}`)
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to fetch courses');
+        return r.json();
+      })
       .then(data => {
+        console.log('Courses loaded:', data.length);
         setCourses(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(err => {
+        console.error('Error loading courses:', err);
+        setLoading(false);
+      });
   }, [search, selectedFilters, sort]);
 
   useEffect(() => {
@@ -221,17 +258,22 @@ function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <div className="pace-gradient text-white pb-16 pt-8">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Find Your Course Equivalencies</h2>
-          <p className="text-blue-200 mb-8">Search pre-approved foreign courses that transfer to Pace University</p>
-          <SearchBar value={search} onChange={setSearch} />
+      <div className="pace-gradient text-white pb-20 pt-12 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
+          <div className="mb-6">
+            <h2 className="text-5xl font-extrabold mb-3 tracking-tight">Find Your Course Equivalencies</h2>
+            <p className="text-xl text-blue-100 mb-2">Search pre-approved foreign courses that transfer to Pace University</p>
+            <p className="text-sm text-blue-200">Explore over 3,000 course equivalencies from partner institutions worldwide</p>
+          </div>
+          <div className="mt-10">
+            <SearchBar value={search} onChange={setSearch} />
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 -mt-6 pb-12">
-        <div className="space-y-6">
+      <main className="max-w-7xl mx-auto px-4 -mt-10 pb-16 relative z-20">
+        <div className="space-y-8">
           <FilterPanel
             filters={filters}
             selected={selectedFilters}
@@ -240,8 +282,10 @@ function HomePage() {
           />
 
           {loading ? (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
-              <p className="text-gray-500">Loading courses...</p>
+            <div className="results-card p-16 text-center fade-in">
+              <div className="loading-spinner mx-auto mb-4"></div>
+              <p className="text-lg font-semibold text-gray-600">Loading courses...</p>
+              <p className="text-sm text-gray-500 mt-2">Please wait while we fetch the data</p>
             </div>
           ) : (
             <ResultsTable courses={courses} sort={sort} onSort={handleSort} />
@@ -311,35 +355,52 @@ function AdminPage() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Admin Login</h2>
-          <form onSubmit={handleLogin} className="space-y-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+        <div className="filter-card p-10 w-full max-w-md fade-in">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl mb-4 shadow-lg">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h2 className="text-3xl font-extrabold text-gray-800 mb-2">Admin Login</h2>
+            <p className="text-sm text-gray-600">Enter your credentials to access the dashboard</p>
+          </div>
+          <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Username</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Username</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-200 outline-none"
+                className="filter-select"
+                placeholder="Enter username"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Password</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-200 outline-none"
+                className="filter-select"
+                placeholder="Enter password"
               />
             </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">
+            {error && (
+              <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-xl">
+                <svg className="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-red-700 text-sm font-medium">{error}</p>
+              </div>
+            )}
+            <button type="submit" className="btn-primary w-full">
               Login
             </button>
           </form>
-          <Link to="/" className="block text-center mt-4 text-blue-600 hover:text-blue-800 text-sm">
-            Back to Search
+          <Link to="/" className="btn-secondary w-full text-center block mt-4">
+            ← Back to Search
           </Link>
         </div>
       </div>
@@ -368,23 +429,40 @@ function AdminPage() {
         <div className="grid gap-6">
           {/* Stats */}
           {stats && (
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <p className="text-3xl font-bold text-blue-600">{stats.totalCourses}</p>
-                <p className="text-gray-500">Total Courses</p>
+            <div className="grid grid-cols-2 gap-6 fade-in">
+              <div className="stat-card">
+                <div className="flex items-center justify-between mb-2">
+                  <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  <span className="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Active</span>
+                </div>
+                <p className="text-4xl font-extrabold text-blue-600 mb-1">{stats.totalCourses.toLocaleString()}</p>
+                <p className="text-sm font-semibold text-gray-600">Total Courses</p>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <p className="text-3xl font-bold text-blue-600">{stats.totalPrograms}</p>
-                <p className="text-gray-500">Study Abroad Programs</p>
+              <div className="stat-card">
+                <div className="flex items-center justify-between mb-2">
+                  <svg className="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">Global</span>
+                </div>
+                <p className="text-4xl font-extrabold text-purple-600 mb-1">{stats.totalPrograms}</p>
+                <p className="text-sm font-semibold text-gray-600">Study Abroad Programs</p>
               </div>
             </div>
           )}
 
           {/* Info */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 className="font-semibold text-gray-800 mb-4">Database Information</h3>
-            <p className="text-sm text-gray-500">
-              To update courses, replace the Excel file in the repository and redeploy.
+          <div className="filter-card p-6 fade-in">
+            <div className="flex items-center gap-2 mb-4">
+              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-lg font-bold text-gray-800">Database Information</h3>
+            </div>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              To update courses, replace the Excel file in the repository and redeploy the application. The data will automatically refresh on the next build.
             </p>
           </div>
         </div>
