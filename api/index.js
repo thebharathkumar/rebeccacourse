@@ -13,7 +13,7 @@ let users = [{ id: 1, username: 'Rebslotkin', password: 'SA2026' }];
 
 // Load data from JSON or Excel
 function loadData() {
-  const jsonPath = path.join(__dirname, 'courses.json');
+  const jsonPath = path.join(__dirname, 'data.json');
   const excelPath = path.join(__dirname, '..', 'VIEW ONLY Pre-Approved Foreign Courses Database.xlsx');
 
   // Try JSON first

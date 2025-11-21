@@ -8,7 +8,7 @@ let coursesCache = null;
 function loadCourses() {
   if (coursesCache) return coursesCache;
 
-  const jsonPath = path.join(__dirname, '..', 'courses.json');
+  const jsonPath = path.join(__dirname, '..', 'data.json');
   try {
     coursesCache = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
     console.log(`Loaded ${coursesCache.length} courses`);
