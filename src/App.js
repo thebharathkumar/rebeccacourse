@@ -27,7 +27,6 @@ function SearchBar({ value, onChange }) {
 function FilterPanel({ filters, selected, onChange, onReset }) {
   const filterConfig = [
     { key: 'program', label: 'Study Abroad Program', options: filters.programs || [] },
-    { key: 'credits', label: 'Foreign Course Credits', options: filters.credits || [] },
     { key: 'aok', label: 'Area of Knowledge (AOK)', options: filters.aoks || [] },
     { key: 'school', label: 'Pace School', options: filters.schools || [] },
     { key: 'department', label: 'Pace Department', options: filters.departments || [] },
@@ -50,7 +49,7 @@ function FilterPanel({ filters, selected, onChange, onReset }) {
           </button>
         )}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {filterConfig.map(({ key, label, options }) => (
           <div key={key}>
             <label className="block text-sm font-semibold text-gray-700 mb-2">{label}</label>
@@ -74,14 +73,14 @@ function FilterPanel({ filters, selected, onChange, onReset }) {
 // Results Table Component
 function ResultsTable({ courses, sort, onSort }) {
   const columns = [
+    { key: 'study_abroad_program', label: 'Program' },
     { key: 'foreign_course_title', label: 'Foreign Course' },
     { key: 'foreign_course_code', label: 'Code' },
     { key: 'foreign_course_credits', label: 'Credits' },
     { key: 'home_course_title', label: 'Pace Equivalent' },
     { key: 'home_course_code', label: 'Pace Code' },
-    { key: 'study_abroad_program', label: 'Program' },
     { key: 'aok', label: 'AOK' },
-    { key: 'pace_school', label: 'School' },
+    { key: 'pace_department', label: 'Department' },
   ];
 
   const handleSort = (key) => {
@@ -126,19 +125,19 @@ function ResultsTable({ courses, sort, onSort }) {
           <tbody>
             {courses.map((course, idx) => (
               <tr key={course.id || idx} className="table-row">
+                <td className="px-6 py-4 text-sm text-gray-700">{course.study_abroad_program}</td>
                 <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.foreign_course_title}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 font-mono">{course.foreign_course_code}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 text-center font-semibold">{course.foreign_course_credits}</td>
                 <td className="px-6 py-4 text-sm font-medium text-gray-900">{course.home_course_title}</td>
                 <td className="px-6 py-4 text-sm text-gray-600 font-mono">{course.home_course_code}</td>
-                <td className="px-6 py-4 text-sm text-gray-700">{course.study_abroad_program}</td>
                 <td className="px-6 py-4">
                   {course.aok && course.aok.split(',').map((a, i) => (
                     <span key={i} className="tag-aok">{a.trim()}</span>
                   ))}
                 </td>
                 <td className="px-6 py-4">
-                  {course.pace_school && <span className="tag-school">{course.pace_school}</span>}
+                  {course.pace_department && <span className="tag-school">{course.pace_department}</span>}
                 </td>
               </tr>
             ))}
