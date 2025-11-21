@@ -25,6 +25,7 @@ module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('X-API-Version', 'v2-dirname-fix');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -38,12 +39,15 @@ module.exports = (req, res) => {
     }
 
     const { search, program, credits, aok, school, department } = req.query;
+    console.log('[courses] Query params received:', { search, program, credits, aok, school, department });
 
     let results = courses;
+    console.log('[courses] Total courses before filtering:', results.length);
 
     // Apply search
     if (search) {
       const s = search.toLowerCase();
+      console.log('[courses] Applying search filter for:', s);
       results = results.filter(c =>
         (c.foreign_course_title && c.foreign_course_title.toLowerCase().includes(s)) ||
         (c.foreign_course_code && c.foreign_course_code.toLowerCase().includes(s)) ||
@@ -55,6 +59,7 @@ module.exports = (req, res) => {
         (c.pace_school && c.pace_school.toLowerCase().includes(s)) ||
         (c.pace_department && c.pace_department.toLowerCase().includes(s))
       );
+      console.log('[courses] After search filter:', results.length, 'courses');
     }
 
     // Apply filters
