@@ -3733,7 +3733,7 @@
   {
     "id": 288,
     "foreign_course_title": "Doing Business in Europe",
-    "foreign_course_code": 80227,
+    "foreign_course_code": "80227",
     "foreign_course_credits": "3",
     "home_course_title": "Management Major Elective",
     "aok": "",
@@ -3902,7 +3902,7 @@
   {
     "id": 301,
     "foreign_course_title": "Corporate Finance",
-    "foreign_course_code": 80228,
+    "foreign_course_code": "80228",
     "foreign_course_credits": "6",
     "home_course_title": "Financial Management",
     "aok": "",
@@ -3928,7 +3928,7 @@
   {
     "id": 303,
     "foreign_course_title": "Digital Business Modeling and Competitive Strategy",
-    "foreign_course_code": 80240,
+    "foreign_course_code": "80240",
     "foreign_course_credits": "3",
     "home_course_title": "Management Major Minor",
     "aok": "",
@@ -3941,7 +3941,7 @@
   {
     "id": 304,
     "foreign_course_title": "Financial Risk Management",
-    "foreign_course_code": 80133,
+    "foreign_course_code": "80133",
     "foreign_course_credits": "6",
     "home_course_title": "Risk Management",
     "aok": "",
@@ -7490,7 +7490,7 @@
   {
     "id": 577,
     "foreign_course_title": "Introduction to Anthropology",
-    "foreign_course_code": 2200309,
+    "foreign_course_code": "2200309",
     "foreign_course_credits": "3",
     "home_course_title": "Introduction to Anthropology (AOK 3 or 5)",
     "aok": "AOK 3, AOK 5",
@@ -7503,7 +7503,7 @@
   {
     "id": 578,
     "foreign_course_title": "International Development",
-    "foreign_course_code": 2200431,
+    "foreign_course_code": "2200431",
     "foreign_course_credits": "3",
     "home_course_title": "Topics in Anthropology",
     "aok": "",
@@ -7516,7 +7516,7 @@
   {
     "id": 579,
     "foreign_course_title": "Postcolonial Cultures",
-    "foreign_course_code": 2200251,
+    "foreign_course_code": "2200251",
     "foreign_course_credits": "3",
     "home_course_title": "Topics in Anthropology",
     "aok": "",
@@ -7529,7 +7529,7 @@
   {
     "id": 580,
     "foreign_course_title": "International Development",
-    "foreign_course_code": 2200431,
+    "foreign_course_code": "2200431",
     "foreign_course_credits": "3",
     "home_course_title": "Anthropology Major Elective",
     "aok": "",
@@ -7542,7 +7542,7 @@
   {
     "id": 581,
     "foreign_course_title": "Postcolonial Cultures",
-    "foreign_course_code": 2200251,
+    "foreign_course_code": "2200251",
     "foreign_course_credits": "3",
     "home_course_title": "Anthropology Major Elective",
     "aok": "",
@@ -7555,7 +7555,7 @@
   {
     "id": 582,
     "foreign_course_title": "Critical Media Studies",
-    "foreign_course_code": 2200319,
+    "foreign_course_code": "2200319",
     "foreign_course_credits": "3",
     "home_course_title": "Digital Cultures (AOK 5)",
     "aok": "AOK 5",
@@ -7568,7 +7568,7 @@
   {
     "id": 583,
     "foreign_course_title": "Environmental Humanities",
-    "foreign_course_code": 2200355,
+    "foreign_course_code": "2200355",
     "foreign_course_credits": "3",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -7581,7 +7581,7 @@
   {
     "id": 584,
     "foreign_course_title": "Literature and Film",
-    "foreign_course_code": 2200325,
+    "foreign_course_code": "2200325",
     "foreign_course_credits": "3",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -7594,7 +7594,7 @@
   {
     "id": 585,
     "foreign_course_title": "Basic Thai for Foreigners",
-    "foreign_course_code": 2200154,
+    "foreign_course_code": "2200154",
     "foreign_course_credits": "3",
     "home_course_title": "Global Asia Studies Major Elective",
     "aok": "",
@@ -7607,7 +7607,7 @@
   {
     "id": 586,
     "foreign_course_title": "Thai Literature and Culture",
-    "foreign_course_code": 2200489,
+    "foreign_course_code": "2200489",
     "foreign_course_credits": "",
     "home_course_title": "Worlds in Literature (AOK 3 or 4)",
     "aok": "AOK 3, AOK 4",
@@ -7620,7 +7620,7 @@
   {
     "id": 587,
     "foreign_course_title": "Popular Fiction",
-    "foreign_course_code": 2202339,
+    "foreign_course_code": "2202339",
     "foreign_course_credits": "3",
     "home_course_title": "Popular Fiction",
     "aok": "",
@@ -7633,7 +7633,7 @@
   {
     "id": 588,
     "foreign_course_title": "Literature and Film",
-    "foreign_course_code": 2200325,
+    "foreign_course_code": "2200325",
     "foreign_course_credits": "3",
     "home_course_title": "Literature and Film",
     "aok": "",
@@ -7646,7 +7646,7 @@
   {
     "id": 589,
     "foreign_course_title": "Dracula and Modern Culture",
-    "foreign_course_code": 2200316,
+    "foreign_course_code": "2200316",
     "foreign_course_credits": "3",
     "home_course_title": "Topic The Gothic Novel",
     "aok": "",
@@ -7659,7 +7659,7 @@
   {
     "id": 590,
     "foreign_course_title": "Music and Culture",
-    "foreign_course_code": 2208330,
+    "foreign_course_code": "2208330",
     "foreign_course_credits": "3",
     "home_course_title": "Music of World Cultures",
     "aok": "",
@@ -7672,7 +7672,7 @@
   {
     "id": 591,
     "foreign_course_title": "Introduction to Gender Studies",
-    "foreign_course_code": 2200214,
+    "foreign_course_code": "2200214",
     "foreign_course_credits": "3",
     "home_course_title": "Intro to Women's & Gender St (AOK 2 or 4)",
     "aok": "AOK 2, AOK 4",
@@ -21608,7 +21608,7 @@
   {
     "id": 1663,
     "foreign_course_title": "Management Accounting",
-    "foreign_course_code": 1218,
+    "foreign_course_code": "1218",
     "foreign_course_credits": "7",
     "home_course_title": "Managerial Accounting",
     "aok": "",
@@ -21621,7 +21621,7 @@
   {
     "id": 1664,
     "foreign_course_title": "Computer Programming",
-    "foreign_course_code": 1318,
+    "foreign_course_code": "1318",
     "foreign_course_credits": "7",
     "home_course_title": "Introduction to Computer Science",
     "aok": "",
@@ -21634,7 +21634,7 @@
   {
     "id": 1665,
     "foreign_course_title": "Microeconomics",
-    "foreign_course_code": 1119,
+    "foreign_course_code": "1119",
     "foreign_course_credits": "7",
     "home_course_title": "Intermediate Microeconomics",
     "aok": "",
@@ -21647,7 +21647,7 @@
   {
     "id": 1666,
     "foreign_course_title": "Global Economics I",
-    "foreign_course_code": 1113,
+    "foreign_course_code": "1113",
     "foreign_course_credits": "7.5",
     "home_course_title": "International Economics",
     "aok": "",
@@ -21660,7 +21660,7 @@
   {
     "id": 1667,
     "foreign_course_title": "Seminar in European Economics",
-    "foreign_course_code": 1104,
+    "foreign_course_code": "1104",
     "foreign_course_credits": "7",
     "home_course_title": "Economics of the European",
     "aok": "",
@@ -21673,7 +21673,7 @@
   {
     "id": 1668,
     "foreign_course_title": "Intro to Modern and Contemporary History",
-    "foreign_course_code": 1409,
+    "foreign_course_code": "1409",
     "foreign_course_credits": "4",
     "home_course_title": "Hstry of Wstrn Civ 1815-Prsnt (AOK 2)",
     "aok": "AOK 2",
@@ -21686,7 +21686,7 @@
   {
     "id": 1669,
     "foreign_course_title": "Marketing",
-    "foreign_course_code": 1220,
+    "foreign_course_code": "1220",
     "foreign_course_credits": "7",
     "home_course_title": "Principles of Marketing",
     "aok": "",
@@ -21699,7 +21699,7 @@
   {
     "id": 1670,
     "foreign_course_title": "Organizational Behavior",
-    "foreign_course_code": 1206,
+    "foreign_course_code": "1206",
     "foreign_course_credits": "7.5",
     "home_course_title": "Organizational Behavior",
     "aok": "",
@@ -21712,7 +21712,7 @@
   {
     "id": 1671,
     "foreign_course_title": "Statistics for Economics and Management",
-    "foreign_course_code": 1313,
+    "foreign_course_code": "1313",
     "foreign_course_credits": "7",
     "home_course_title": "Business App of Data Analysis",
     "aok": "",
@@ -21725,7 +21725,7 @@
   {
     "id": 1672,
     "foreign_course_title": "Operations Management",
-    "foreign_course_code": 1221,
+    "foreign_course_code": "1221",
     "foreign_course_credits": "7",
     "home_course_title": "Ops. and Supply Chain Mgt",
     "aok": "",
@@ -21738,7 +21738,7 @@
   {
     "id": 1673,
     "foreign_course_title": "Modeling and Optimization",
-    "foreign_course_code": 1307,
+    "foreign_course_code": "1307",
     "foreign_course_credits": "7.5",
     "home_course_title": "Optimization Models",
     "aok": "",
@@ -21751,7 +21751,7 @@
   {
     "id": 1674,
     "foreign_course_title": "Ethics",
-    "foreign_course_code": 1463,
+    "foreign_course_code": "1463",
     "foreign_course_credits": "3.5",
     "home_course_title": "Nrmatve Ethics  Cntmpry Prblms (AOK 5)",
     "aok": "AOK 5",
@@ -27822,7 +27822,7 @@
   {
     "id": 2141,
     "foreign_course_title": "German Language Course A1",
-    "foreign_course_code": 22451,
+    "foreign_course_code": "22451",
     "foreign_course_credits": "2",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -27835,7 +27835,7 @@
   {
     "id": 2142,
     "foreign_course_title": "German Society & Culture",
-    "foreign_course_code": 22448,
+    "foreign_course_code": "22448",
     "foreign_course_credits": "2",
     "home_course_title": "Contemporary German Fiction (AOK 2)",
     "aok": "AOK 2",
@@ -27848,7 +27848,7 @@
   {
     "id": 2143,
     "foreign_course_title": "Cross-Cultural Studies Anime and Japanese Popular Culture",
-    "foreign_course_code": 268901,
+    "foreign_course_code": "268901",
     "foreign_course_credits": "4",
     "home_course_title": "Japanese Manga & Anime",
     "aok": "",
@@ -27861,7 +27861,7 @@
   {
     "id": 2144,
     "foreign_course_title": "Cross-Cultural Studies Anime and Japanese Popular Culture",
-    "foreign_course_code": 268901,
+    "foreign_course_code": "268901",
     "foreign_course_credits": "4",
     "home_course_title": "The Reinvention of South Asia",
     "aok": "",
@@ -34322,7 +34322,7 @@
   {
     "id": 2641,
     "foreign_course_title": "Aboriginal Sydney Now",
-    "foreign_course_code": 13992,
+    "foreign_course_code": "13992",
     "foreign_course_credits": "6",
     "home_course_title": "Intro to Crtcl Race & Ethncty (AOK 2)",
     "aok": "AOK 2",
@@ -34335,7 +34335,7 @@
   {
     "id": 2642,
     "foreign_course_title": "Screen Story",
-    "foreign_course_code": 52650,
+    "foreign_course_code": "52650",
     "foreign_course_credits": "6",
     "home_course_title": "Screenwriting",
     "aok": "",
@@ -34348,7 +34348,7 @@
   {
     "id": 2643,
     "foreign_course_title": "Experimental Media",
-    "foreign_course_code": 52654,
+    "foreign_course_code": "52654",
     "foreign_course_credits": "4",
     "home_course_title": "Mixed Media (AOK 4)",
     "aok": "AOK 4",
@@ -34361,7 +34361,7 @@
   {
     "id": 2644,
     "foreign_course_title": "Studio Practice: Ceramics",
-    "foreign_course_code": 13219,
+    "foreign_course_code": "13219",
     "foreign_course_credits": "4",
     "home_course_title": "Art Major Minor",
     "aok": "",
@@ -34374,7 +34374,7 @@
   {
     "id": 2645,
     "foreign_course_title": "Introduction to 2D Animation",
-    "foreign_course_code": 54442,
+    "foreign_course_code": "54442",
     "foreign_course_credits": "4",
     "home_course_title": "Video Animation (AOK 4)",
     "aok": "AOK 4",
@@ -34387,7 +34387,7 @@
   {
     "id": 2646,
     "foreign_course_title": "Ceramics and Claymation",
-    "foreign_course_code": 28004,
+    "foreign_course_code": "28004",
     "foreign_course_credits": "6",
     "home_course_title": "Art Major Minor",
     "aok": "",
@@ -34400,7 +34400,7 @@
   {
     "id": 2647,
     "foreign_course_title": "Screen Story ",
-    "foreign_course_code": 54462,
+    "foreign_course_code": "54462",
     "foreign_course_credits": "6",
     "home_course_title": "Literature Major Minor",
     "aok": "",
@@ -34413,7 +34413,7 @@
   {
     "id": 2648,
     "foreign_course_title": "Screen Story ",
-    "foreign_course_code": 54462,
+    "foreign_course_code": "54462",
     "foreign_course_credits": "6",
     "home_course_title": "Writing for the Screen",
     "aok": "",
@@ -34426,7 +34426,7 @@
   {
     "id": 2649,
     "foreign_course_title": "Aboriginal Sydney Now",
-    "foreign_course_code": 13992,
+    "foreign_course_code": "13992",
     "foreign_course_credits": "6",
     "home_course_title": "Native and Indigenous Peoples Studies (AOK 2 or 4)",
     "aok": "AOK 2, AOK 4",
@@ -34439,7 +34439,7 @@
   {
     "id": 2650,
     "foreign_course_title": "Cultures of Globalisation",
-    "foreign_course_code": 99211,
+    "foreign_course_code": "99211",
     "foreign_course_credits": "6",
     "home_course_title": "Global Culture & Local Identities (AOK 3 or 5)",
     "aok": "AOK 3, AOK 5",
@@ -34452,7 +34452,7 @@
   {
     "id": 2651,
     "foreign_course_title": "Introduction to Photography",
-    "foreign_course_code": 88805,
+    "foreign_course_code": "88805",
     "foreign_course_credits": "6",
     "home_course_title": "Intro to Photography (AOK 4)",
     "aok": "AOK 4",
@@ -34465,7 +34465,7 @@
   {
     "id": 2652,
     "foreign_course_title": "Introduction to Photography for Design and Architecture",
-    "foreign_course_code": 88801,
+    "foreign_course_code": "88801",
     "foreign_course_credits": "6",
     "home_course_title": "Intro to Photography (AOK 4)",
     "aok": "AOK 4",
@@ -34478,7 +34478,7 @@
   {
     "id": 2653,
     "foreign_course_title": "Digital Photomedia",
-    "foreign_course_code": 87669,
+    "foreign_course_code": "87669",
     "foreign_course_credits": "6",
     "home_course_title": "Digital Photography I (AOK 4)",
     "aok": "AOK 4",
@@ -34491,7 +34491,7 @@
   {
     "id": 2654,
     "foreign_course_title": "Exploring Media Arts",
-    "foreign_course_code": 52651,
+    "foreign_course_code": "52651",
     "foreign_course_credits": "6",
     "home_course_title": "Mixed Media (AOK 4)",
     "aok": "AOK 4",
@@ -34504,7 +34504,7 @@
   {
     "id": 2655,
     "foreign_course_title": "Webmedia",
-    "foreign_course_code": 87539,
+    "foreign_course_code": "87539",
     "foreign_course_credits": "6",
     "home_course_title": "Design for the Internet (AOK 4)",
     "aok": "AOK 4",
@@ -34517,7 +34517,7 @@
   {
     "id": 2656,
     "foreign_course_title": "Cell Biology and Genetics",
-    "foreign_course_code": 91161,
+    "foreign_course_code": "91161",
     "foreign_course_credits": "6",
     "home_course_title": "Biology & Contemporary Society",
     "aok": "",
@@ -34530,7 +34530,7 @@
   {
     "id": 2657,
     "foreign_course_title": "General Microbiology",
-    "foreign_course_code": 91314,
+    "foreign_course_code": "91314",
     "foreign_course_credits": "6",
     "home_course_title": "Microbiology",
     "aok": "",
@@ -34543,7 +34543,7 @@
   {
     "id": 2658,
     "foreign_course_title": "Metabolic Biochemistry",
-    "foreign_course_code": 91320,
+    "foreign_course_code": "91320",
     "foreign_course_credits": "6",
     "home_course_title": "Cellular Biochemistry",
     "aok": "",
@@ -34556,7 +34556,7 @@
   {
     "id": 2659,
     "foreign_course_title": "Principles of Forensic Science",
-    "foreign_course_code": 65242,
+    "foreign_course_code": "65242",
     "foreign_course_credits": "6",
     "home_course_title": "Forensic Chemistry I",
     "aok": "",
@@ -34569,7 +34569,7 @@
   {
     "id": 2660,
     "foreign_course_title": "Introduction to Computer Game Development",
-    "foreign_course_code": 31263,
+    "foreign_course_code": "31263",
     "foreign_course_credits": "6",
     "home_course_title": "Game Development for Everyone (AOK 4)",
     "aok": "AOK 4",
@@ -34582,7 +34582,7 @@
   {
     "id": 2661,
     "foreign_course_title": "Introduction to Information Systems",
-    "foreign_course_code": 31266,
+    "foreign_course_code": "31266",
     "foreign_course_credits": "6",
     "home_course_title": "Intro to Inform Technology",
     "aok": "",
@@ -34595,7 +34595,7 @@
   {
     "id": 2662,
     "foreign_course_title": "The Social Life of Technology",
-    "foreign_course_code": 52718,
+    "foreign_course_code": "52718",
     "foreign_course_credits": "6",
     "home_course_title": "New Communication Technologies and Moral Panic",
     "aok": "",
@@ -34608,7 +34608,7 @@
   {
     "id": 2663,
     "foreign_course_title": "Citizenship and Communication",
-    "foreign_course_code": 54000,
+    "foreign_course_code": "54000",
     "foreign_course_credits": "8",
     "home_course_title": "Political Communication",
     "aok": "",
@@ -34621,7 +34621,7 @@
   {
     "id": 2664,
     "foreign_course_title": "Culture  Plugged and Unplugged",
-    "foreign_course_code": 54092,
+    "foreign_course_code": "54092",
     "foreign_course_credits": "8",
     "home_course_title": "Topics in Communication & Media Studies",
     "aok": "",
@@ -34634,7 +34634,7 @@
   {
     "id": 2665,
     "foreign_course_title": "Culture  Plugged and Unplugged",
-    "foreign_course_code": 54092,
+    "foreign_course_code": "54092",
     "foreign_course_credits": "8",
     "home_course_title": "Topics in Communication & Media Studies",
     "aok": "",
@@ -34647,7 +34647,7 @@
   {
     "id": 2666,
     "foreign_course_title": "Self and Society",
-    "foreign_course_code": 52670,
+    "foreign_course_code": "52670",
     "foreign_course_credits": "6",
     "home_course_title": "Topics in Communication & Media Studies",
     "aok": "",
@@ -34660,7 +34660,7 @@
   {
     "id": 2667,
     "foreign_course_title": "Self and Society",
-    "foreign_course_code": 52670,
+    "foreign_course_code": "52670",
     "foreign_course_credits": "6",
     "home_course_title": "Topics in Communication & Media Studies",
     "aok": "",
@@ -34673,7 +34673,7 @@
   {
     "id": 2668,
     "foreign_course_title": "Digital Media Metrics",
-    "foreign_course_code": 52682,
+    "foreign_course_code": "52682",
     "foreign_course_credits": "6",
     "home_course_title": "CMS Major Elective Group 3",
     "aok": "",
@@ -34686,7 +34686,7 @@
   {
     "id": 2669,
     "foreign_course_title": "Introductory Digital Systems",
-    "foreign_course_code": 48441,
+    "foreign_course_code": "48441",
     "foreign_course_credits": "6",
     "home_course_title": "Computer Organization",
     "aok": "",
@@ -34699,7 +34699,7 @@
   {
     "id": 2670,
     "foreign_course_title": "Data Structures and Algorithms",
-    "foreign_course_code": 31251,
+    "foreign_course_code": "31251",
     "foreign_course_credits": "6",
     "home_course_title": "Data Structures and Algorithms",
     "aok": "",
@@ -34712,7 +34712,7 @@
   {
     "id": 2671,
     "foreign_course_title": "Introduction to Computer Game Development",
-    "foreign_course_code": 31263,
+    "foreign_course_code": "31263",
     "foreign_course_credits": "6",
     "home_course_title": "Introduction to Game Programming",
     "aok": "",
@@ -34725,7 +34725,7 @@
   {
     "id": 2672,
     "foreign_course_title": "Systems Security",
-    "foreign_course_code": 41182,
+    "foreign_course_code": "41182",
     "foreign_course_credits": "6",
     "home_course_title": "Fundamentals of Data and Network Security",
     "aok": "",
@@ -34738,7 +34738,7 @@
   {
     "id": 2673,
     "foreign_course_title": "Advanced Games Programming",
-    "foreign_course_code": 41024,
+    "foreign_course_code": "41024",
     "foreign_course_credits": "6",
     "home_course_title": "Advanced Topics in Game Development",
     "aok": "",
@@ -34751,7 +34751,7 @@
   {
     "id": 2674,
     "foreign_course_title": "Fundamentals of Interaction Design",
-    "foreign_course_code": 31260,
+    "foreign_course_code": "31260",
     "foreign_course_credits": "6",
     "home_course_title": "Introduction to HCI",
     "aok": "",
@@ -34764,7 +34764,7 @@
   {
     "id": 2675,
     "foreign_course_title": "Real-time Operating Systems",
-    "foreign_course_code": 48450,
+    "foreign_course_code": "48450",
     "foreign_course_credits": "6",
     "home_course_title": "Operating Sys and Architecture I",
     "aok": "",
@@ -34777,7 +34777,7 @@
   {
     "id": 2676,
     "foreign_course_title": "Computer Graphics",
-    "foreign_course_code": 31264,
+    "foreign_course_code": "31264",
     "foreign_course_credits": "6",
     "home_course_title": "Game Engine Architecture",
     "aok": "",
@@ -34790,7 +34790,7 @@
   {
     "id": 2677,
     "foreign_course_title": "Game Design Studio 1",
-    "foreign_course_code": 31102,
+    "foreign_course_code": "31102",
     "foreign_course_credits": "6",
     "home_course_title": "Game Studio Capstone",
     "aok": "",
@@ -34803,7 +34803,7 @@
   {
     "id": 2678,
     "foreign_course_title": "Serious Games and Gamification Studio",
-    "foreign_course_code": 31248,
+    "foreign_course_code": "31248",
     "foreign_course_credits": "6",
     "home_course_title": "Game Studio Capstone",
     "aok": "",
@@ -34816,7 +34816,7 @@
   {
     "id": 2679,
     "foreign_course_title": "Network Fundamentals",
-    "foreign_course_code": 41092,
+    "foreign_course_code": "41092",
     "foreign_course_credits": "6",
     "home_course_title": "Computer Netwrk & the Internet",
     "aok": "",
@@ -34829,7 +34829,7 @@
   {
     "id": 2680,
     "foreign_course_title": "Systems Security",
-    "foreign_course_code": 41182,
+    "foreign_course_code": "41182",
     "foreign_course_credits": "6",
     "home_course_title": "Network Security and Defense",
     "aok": "",
@@ -34842,7 +34842,7 @@
   {
     "id": 2681,
     "foreign_course_title": "Environmental Chemistry",
-    "foreign_course_code": 65621,
+    "foreign_course_code": "65621",
     "foreign_course_credits": "6",
     "home_course_title": "Environmental Chemistry",
     "aok": "",
@@ -34855,7 +34855,7 @@
   {
     "id": 2682,
     "foreign_course_title": "Aquatic Ecosystems",
-    "foreign_course_code": 91121,
+    "foreign_course_code": "91121",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34868,7 +34868,7 @@
   {
     "id": 2683,
     "foreign_course_title": "Becoming Australia",
-    "foreign_course_code": 54098,
+    "foreign_course_code": "54098",
     "foreign_course_credits": "8",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34881,7 +34881,7 @@
   {
     "id": 2684,
     "foreign_course_title": "Business to Business Marketing",
-    "foreign_course_code": 24205,
+    "foreign_course_code": "24205",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34894,7 +34894,7 @@
   {
     "id": 2685,
     "foreign_course_title": "Communication for IT Professionals",
-    "foreign_course_code": 31265,
+    "foreign_course_code": "31265",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34907,7 +34907,7 @@
   {
     "id": 2686,
     "foreign_course_title": "Design, Data, and Decisions",
-    "foreign_course_code": 33116,
+    "foreign_course_code": "33116",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34920,7 +34920,7 @@
   {
     "id": 2687,
     "foreign_course_title": "Introduction to Data Analytics",
-    "foreign_course_code": 31250,
+    "foreign_course_code": "31250",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34933,7 +34933,7 @@
   {
     "id": 2688,
     "foreign_course_title": "Researching Design Histories",
-    "foreign_course_code": 85502,
+    "foreign_course_code": "85502",
     "foreign_course_credits": "6",
     "home_course_title": "General Open Elective",
     "aok": "",
@@ -34946,7 +34946,7 @@
   {
     "id": 2689,
     "foreign_course_title": "Becoming Australia",
-    "foreign_course_code": 54098,
+    "foreign_course_code": "54098",
     "foreign_course_credits": "8",
     "home_course_title": "Modern Britain (AOK 2)",
     "aok": "AOK 2",
@@ -34959,7 +34959,7 @@
   {
     "id": 2690,
     "foreign_course_title": "Contemporary Germany",
-    "foreign_course_code": 976421,
+    "foreign_course_code": "976421",
     "foreign_course_credits": "8",
     "home_course_title": "Ger & Central Europe and 1848 (AOK 2)",
     "aok": "AOK 2",
@@ -34972,7 +34972,7 @@
   {
     "id": 2691,
     "foreign_course_title": "Contemporary Italy",
-    "foreign_course_code": 976431,
+    "foreign_course_code": "976431",
     "foreign_course_credits": "8",
     "home_course_title": "Italian Civilization II (AOK 2)",
     "aok": "AOK 2",
@@ -34985,7 +34985,7 @@
   {
     "id": 2692,
     "foreign_course_title": "Culture  Plugged and Unplugged",
-    "foreign_course_code": 54092,
+    "foreign_course_code": "54092",
     "foreign_course_credits": "8",
     "home_course_title": "Intro to Cultural Studies",
     "aok": "",
@@ -34998,7 +34998,7 @@
   {
     "id": 2693,
     "foreign_course_title": "Culture  Plugged and Unplugged",
-    "foreign_course_code": 54092,
+    "foreign_course_code": "54092",
     "foreign_course_credits": "8",
     "home_course_title": "Intro to Cultural Studies",
     "aok": "",
@@ -35011,7 +35011,7 @@
   {
     "id": 2694,
     "foreign_course_title": "Narrative in Theory in Practice",
-    "foreign_course_code": 52690,
+    "foreign_course_code": "52690",
     "foreign_course_credits": "6",
     "home_course_title": "Literary Theory & Criticism",
     "aok": "",
@@ -35024,7 +35024,7 @@
   {
     "id": 2695,
     "foreign_course_title": "Marketing Research",
-    "foreign_course_code": 24309,
+    "foreign_course_code": "24309",
     "foreign_course_credits": "6",
     "home_course_title": "Marketing Research",
     "aok": "",
@@ -35037,7 +35037,7 @@
   {
     "id": 2696,
     "foreign_course_title": "Design, Data, and Decisions",
-    "foreign_course_code": 33116,
+    "foreign_course_code": "33116",
     "foreign_course_credits": "6",
     "home_course_title": "Intro Stats for the Life Sci (AOK 5)",
     "aok": "AOK 5",
@@ -35050,7 +35050,7 @@
   {
     "id": 2697,
     "foreign_course_title": "Design, Data, and Decisions",
-    "foreign_course_code": 33116,
+    "foreign_course_code": "33116",
     "foreign_course_credits": "6",
     "home_course_title": "Intro to Prob & Stat Analysis (AOK 5)",
     "aok": "AOK 5",
@@ -35063,7 +35063,7 @@
   {
     "id": 2698,
     "foreign_course_title": "Self and Society",
-    "foreign_course_code": 52670,
+    "foreign_course_code": "52670",
     "foreign_course_credits": "6",
     "home_course_title": "Topic  Self and Society (AOK 5)",
     "aok": "AOK 5",
@@ -35076,7 +35076,7 @@
   {
     "id": 2699,
     "foreign_course_title": "Self and Society",
-    "foreign_course_code": 52670,
+    "foreign_course_code": "52670",
     "foreign_course_credits": "6",
     "home_course_title": "Topic  Self and Society (AOK 5)",
     "aok": "AOK 5",
@@ -35089,7 +35089,7 @@
   {
     "id": 2700,
     "foreign_course_title": "Spanish Language and Culture 1",
-    "foreign_course_code": 97501,
+    "foreign_course_code": "97501",
     "foreign_course_credits": "8",
     "home_course_title": "Elementary College Spanish II",
     "aok": "",
@@ -35102,7 +35102,7 @@
   {
     "id": 2701,
     "foreign_course_title": "Sexing Power",
-    "foreign_course_code": 54083,
+    "foreign_course_code": "54083",
     "foreign_course_credits": "8",
     "home_course_title": "Intro to Women's & Gender St (AOK 2 or 4)",
     "aok": "AOK 2, AOK 4",
@@ -35414,7 +35414,7 @@
   {
     "id": 2725,
     "foreign_course_title": "Social Media: Content Curation and Creation",
-    "foreign_course_code": 204,
+    "foreign_course_code": "204",
     "foreign_course_credits": "12",
     "home_course_title": "Literature Major Minor",
     "aok": "",
