@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Load data once when the function starts
-const dataPath = path.join(process.cwd(), 'api', 'data.json');
+// Load data once when the function starts - use __dirname for Vercel compatibility
+const dataPath = path.join(__dirname, 'data.json');
 let coursesData = null;
 
 function loadCourses() {

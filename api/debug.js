@@ -8,20 +8,23 @@ module.exports = (req, res) => {
   try {
     const cwd = process.cwd();
     const apiDir = path.join(cwd, 'api');
-    const dataPath = path.join(apiDir, 'data.json');
+    const oldDataPath = path.join(apiDir, 'data.json');
+    const newDataPath = path.join(__dirname, 'data.json');
 
     const debugInfo = {
       cwd: cwd,
-      apiDir: apiDir,
-      dataPath: dataPath,
-      dataExists: fs.existsSync(dataPath),
+      dirname: __dirname,
+      oldDataPath: oldDataPath,
+      oldDataExists: fs.existsSync(oldDataPath),
+      newDataPath: newDataPath,
+      newDataExists: fs.existsSync(newDataPath),
       apiDirExists: fs.existsSync(apiDir),
-      apiFiles: fs.existsSync(apiDir) ? fs.readdirSync(apiDir) : [],
-      rootFiles: fs.readdirSync(cwd)
+      apiFiles: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : [],
+      rootFiles: fs.existsSync(cwd) ? fs.readdirSync(cwd) : []
     };
 
-    if (fs.existsSync(dataPath)) {
-      const stats = fs.statSync(dataPath);
+    if (fs.existsSync(newDataPath)) {
+      const stats = fs.statSync(newDataPath);
       debugInfo.dataSize = stats.size;
       debugInfo.dataSizeMB = (stats.size / 1024 / 1024).toFixed(2) + ' MB';
     }
