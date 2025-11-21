@@ -27,7 +27,6 @@ function SearchBar({ value, onChange }) {
 function FilterPanel({ filters, selected, onChange, onReset }) {
   const filterConfig = [
     { key: 'program', label: 'Study Abroad Program', options: filters.programs || [] },
-    { key: 'credits', label: 'Foreign Course Credits', options: filters.credits || [] },
     { key: 'aok', label: 'Area of Knowledge (AOK)', options: filters.aoks || [] },
     { key: 'school', label: 'Pace School', options: filters.schools || [] },
     { key: 'department', label: 'Pace Department', options: filters.departments || [] },
@@ -50,7 +49,7 @@ function FilterPanel({ filters, selected, onChange, onReset }) {
           </button>
         )}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {filterConfig.map(({ key, label, options }) => (
           <div key={key}>
             <label className="block text-sm font-semibold text-gray-700 mb-2">{label}</label>
