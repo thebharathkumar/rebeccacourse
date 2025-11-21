@@ -242,13 +242,11 @@ function HomePage() {
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight">
-                <span style={{color: '#002D72'}}>PACE </span>
-                <span style={{color: '#5DADE2'}}>UNIVERSITY</span>
-              </h1>
-              <p style={{color: '#5DADE2'}} className="text-sm font-medium">International</p>
-            </div>
+            <img
+              src="/Pace-International-SingleLine-FlushLeft-2Color-PMS.jpg"
+              alt="Pace University International"
+              className="h-12"
+            />
             <Link to="/admin" className="text-gray-500 hover:text-gray-700 text-sm">
               Admin
             </Link>
