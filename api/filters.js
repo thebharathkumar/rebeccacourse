@@ -39,7 +39,16 @@ module.exports = (req, res) => {
 
     const programs = [...new Set(courses.map(c => c.study_abroad_program).filter(Boolean))].sort();
     const credits = [...new Set(courses.map(c => String(c.foreign_course_credits)).filter(Boolean))].sort();
-    const aoks = [...new Set(courses.map(c => c.aok).filter(Boolean))].sort();
+
+    // Split AOK values by comma to get individual values only (AOK 2, not "AOK 2, AOK 4")
+    const aoks = [...new Set(
+      courses
+        .map(c => c.aok)
+        .filter(Boolean)
+        .flatMap(aok => aok.split(',').map(a => a.trim()))
+        .filter(Boolean)
+    )].sort();
+
     const schools = [...new Set(courses.map(c => c.pace_school).filter(Boolean))].sort();
     const departments = [...new Set(courses.map(c => c.pace_department).filter(Boolean))].sort();
 

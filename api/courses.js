@@ -65,7 +65,8 @@ module.exports = (req, res) => {
     // Apply filters
     if (program) results = results.filter(c => c.study_abroad_program === program);
     if (credits) results = results.filter(c => String(c.foreign_course_credits) === String(credits));
-    if (aok) results = results.filter(c => c.aok && c.aok.includes(aok));
+    // For AOK, split by comma and check if the selected AOK is in the list
+    if (aok) results = results.filter(c => c.aok && c.aok.split(',').map(a => a.trim()).includes(aok));
     if (school) results = results.filter(c => c.pace_school === school);
     if (department) results = results.filter(c => c.pace_department === department);
 
