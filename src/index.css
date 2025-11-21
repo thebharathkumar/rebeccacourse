@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #f8fafc;
+}
+
+.pace-gradient {
+  background: linear-gradient(135deg, #002d72 0%, #003d8f 50%, #0052b4 100%);
+}
+
+.tag-aok {
+  @apply inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 mr-1 mb-1;
+}
+
+.tag-school {
+  @apply inline-block px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800;
+}
