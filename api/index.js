@@ -76,7 +76,14 @@ function checkAuth(req) {
 
 // API Routes
 app.get('/api/courses', (req, res) => {
+  // Ensure data is loaded
+  if (courses.length === 0) {
+    loadData();
+  }
+
   const { search, program, credits, aok, school, department, sort, order } = req.query;
+
+  console.log('Search query:', search, 'Total courses:', courses.length);
 
   let results = [...courses];
 
@@ -88,6 +95,7 @@ app.get('/api/courses', (req, res) => {
       (c.foreign_course_code || '').toLowerCase().includes(s) ||
       (c.home_course_code || '').toLowerCase().includes(s)
     );
+    console.log('Filtered results:', results.length);
   }
   if (program) results = results.filter(c => c.study_abroad_program === program);
   if (credits) results = results.filter(c => c.foreign_course_credits === credits);
@@ -107,6 +115,11 @@ app.get('/api/courses', (req, res) => {
 });
 
 app.get('/api/filters', (req, res) => {
+  // Ensure data is loaded
+  if (courses.length === 0) {
+    loadData();
+  }
+
   const getUnique = (key) => [...new Set(courses.map(c => c[key]).filter(v => v))].sort();
 
   res.json({
@@ -132,6 +145,11 @@ app.post('/api/login', (req, res) => {
 
 app.get('/api/admin/stats', (req, res) => {
   if (!checkAuth(req)) return res.status(401).json({ error: 'Unauthorized' });
+
+  // Ensure data is loaded
+  if (courses.length === 0) {
+    loadData();
+  }
 
   const programs = new Set(courses.map(c => c.study_abroad_program).filter(v => v));
   res.json({ totalCourses: courses.length, totalPrograms: programs.size });
