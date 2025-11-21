@@ -2,27 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #f8fafc;
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+  }
 }
 
-.pace-gradient {
-  background: linear-gradient(135deg, #002D72 0%, #003d8f 100%);
-}
+@layer components {
+  .pace-gradient {
+    background: linear-gradient(135deg, #002D72 0%, #003d8f 50%, #0052b4 100%);
+    position: relative;
+    overflow: hidden;
+  }
 
-.pace-dark {
-  color: #002D72;
-}
+  .pace-gradient::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(93, 173, 226, 0.1) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+  }
 
-.pace-light {
-  color: #5DADE2;
-}
+  @keyframes pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+    50% { transform: scale(1.1) rotate(180deg); opacity: 0.5; }
+  }
 
-.tag-aok {
-  @apply inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 mr-1 mb-1;
-}
+  .search-input {
+    @apply w-full px-6 py-4 text-lg text-gray-800 bg-white/95 backdrop-blur-sm border-2 border-gray-200 rounded-2xl shadow-lg;
+    @apply focus:border-blue-500 focus:ring-4 focus:ring-blue-200/50 outline-none transition-all duration-300;
+    @apply hover:shadow-xl hover:border-blue-300;
+  }
 
-.tag-school {
-  @apply inline-block px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800;
+  .filter-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100;
+    @apply transition-all duration-300 hover:shadow-xl;
+  }
+
+  .results-card {
+    @apply bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden;
+    @apply transition-all duration-300 hover:shadow-xl;
+  }
+
+  .table-row {
+    @apply transition-all duration-200 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50;
+    @apply border-b border-gray-100 last:border-0;
+  }
+
+  .tag-aok {
+    @apply inline-block px-3 py-1 text-xs font-semibold rounded-full;
+    @apply bg-gradient-to-r from-blue-100 to-blue-200 text-blue-900 mr-1 mb-1;
+    @apply shadow-sm transition-transform duration-200 hover:scale-105;
+  }
+
+  .tag-school {
+    @apply inline-block px-3 py-1 text-xs font-semibold rounded-full;
+    @apply bg-gradient-to-r from-amber-100 to-orange-200 text-amber-900;
+    @apply shadow-sm transition-transform duration-200 hover:scale-105;
+  }
+
+  .filter-select {
+    @apply w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white/50;
+    @apply focus:border-blue-500 focus:ring-2 focus:ring-blue-200/50 outline-none transition-all duration-200;
+    @apply hover:bg-white hover:border-blue-300;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl;
+    @apply shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-blue-800;
+    @apply transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 text-blue-600 hover:text-blue-800 font-medium;
+    @apply transition-all duration-200 hover:bg-blue-50 rounded-lg;
+  }
+
+  .stat-card {
+    @apply bg-gradient-to-br from-white to-blue-50 p-6 rounded-2xl shadow-lg border border-blue-100;
+    @apply transition-all duration-300 hover:shadow-xl hover:scale-105;
+  }
+
+  .loading-spinner {
+    @apply inline-block w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
