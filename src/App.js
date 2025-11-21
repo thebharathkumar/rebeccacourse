@@ -81,7 +81,7 @@ function ResultsTable({ courses, sort, onSort }) {
     { key: 'home_course_code', label: 'Pace Code' },
     { key: 'study_abroad_program', label: 'Program' },
     { key: 'aok', label: 'AOK' },
-    { key: 'pace_school', label: 'School' },
+    { key: 'pace_department', label: 'Department' },
   ];
 
   const handleSort = (key) => {
@@ -138,7 +138,7 @@ function ResultsTable({ courses, sort, onSort }) {
                   ))}
                 </td>
                 <td className="px-6 py-4">
-                  {course.pace_school && <span className="tag-school">{course.pace_school}</span>}
+                  {course.pace_department && <span className="tag-school">{course.pace_department}</span>}
                 </td>
               </tr>
             ))}
