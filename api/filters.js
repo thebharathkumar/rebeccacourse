@@ -1,18 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// Load courses data once
+// Load data once when the function starts - use __dirname for Vercel compatibility
 const dataPath = path.join(__dirname, 'data.json');
 let coursesData = null;
 
-function getCourses() {
+function loadCourses() {
   if (!coursesData) {
     try {
-      const rawData = fs.readFileSync(dataPath, 'utf8');
-      coursesData = JSON.parse(rawData);
-      console.log(`[filters] Loaded ${coursesData.length} courses from data.json`);
+      const fileContent = fs.readFileSync(dataPath, 'utf8');
+      coursesData = JSON.parse(fileContent);
+      console.log('[filters] Successfully loaded', coursesData.length, 'courses');
     } catch (error) {
-      console.error('[filters] Error loading data:', error);
+      console.error('[filters] Failed to load data:', error.message);
       coursesData = [];
     }
   }
@@ -24,50 +24,35 @@ module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Content-Type', 'application/json');
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'GET') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+    return res.status(200).end();
   }
 
   try {
-    const courses = getCourses();
+    const courses = loadCourses();
 
-    // Extract unique values for each filter
+    if (courses.length === 0) {
+      return res.status(500).json({ error: 'No course data available' });
+    }
+
     const programs = [...new Set(courses.map(c => c.study_abroad_program).filter(Boolean))].sort();
-    const credits = [...new Set(courses.map(c => String(c.foreign_course_credits)).filter(Boolean))].sort((a, b) => {
-      const numA = parseFloat(a);
-      const numB = parseFloat(b);
-      return numA - numB;
-    });
+    const credits = [...new Set(courses.map(c => String(c.foreign_course_credits)).filter(Boolean))].sort();
     const aoks = [...new Set(courses.map(c => c.aok).filter(Boolean))].sort();
     const schools = [...new Set(courses.map(c => c.pace_school).filter(Boolean))].sort();
     const departments = [...new Set(courses.map(c => c.pace_department).filter(Boolean))].sort();
 
-    const result = {
+    console.log('[filters] Returning filters');
+    return res.status(200).json({
       programs,
       credits,
       aoks,
       schools,
       departments
-    };
-
-    console.log('[filters] Returning filters:', {
-      programs: programs.length,
-      credits: credits.length,
-      aoks: aoks.length,
-      schools: schools.length,
-      departments: departments.length
     });
-
-    res.status(200).json(result);
   } catch (error) {
     console.error('[filters] Error:', error);
-    res.status(500).json({ error: 'Internal server error', message: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
