@@ -44,20 +44,20 @@ module.exports = (req, res) => {
     let results = courses;
     console.log('[courses] Total courses before filtering:', results.length);
 
-    // Apply search
+    // Apply search - convert all fields to strings to avoid toLowerCase errors
     if (search) {
       const s = search.toLowerCase();
       console.log('[courses] Applying search filter for:', s);
       results = results.filter(c =>
-        (c.foreign_course_title && c.foreign_course_title.toLowerCase().includes(s)) ||
-        (c.foreign_course_code && c.foreign_course_code.toLowerCase().includes(s)) ||
-        (c.home_course_title && c.home_course_title.toLowerCase().includes(s)) ||
-        (c.home_course_code && c.home_course_code.toLowerCase().includes(s)) ||
-        (c.study_abroad_program && c.study_abroad_program.toLowerCase().includes(s)) ||
-        (c.foreign_course_credits && String(c.foreign_course_credits).includes(s)) ||
-        (c.aok && c.aok.toLowerCase().includes(s)) ||
-        (c.pace_school && c.pace_school.toLowerCase().includes(s)) ||
-        (c.pace_department && c.pace_department.toLowerCase().includes(s))
+        (c.foreign_course_title && String(c.foreign_course_title).toLowerCase().includes(s)) ||
+        (c.foreign_course_code && String(c.foreign_course_code).toLowerCase().includes(s)) ||
+        (c.home_course_title && String(c.home_course_title).toLowerCase().includes(s)) ||
+        (c.home_course_code && String(c.home_course_code).toLowerCase().includes(s)) ||
+        (c.study_abroad_program && String(c.study_abroad_program).toLowerCase().includes(s)) ||
+        (c.foreign_course_credits && String(c.foreign_course_credits).toLowerCase().includes(s)) ||
+        (c.aok && String(c.aok).toLowerCase().includes(s)) ||
+        (c.pace_school && String(c.pace_school).toLowerCase().includes(s)) ||
+        (c.pace_department && String(c.pace_department).toLowerCase().includes(s))
       );
       console.log('[courses] After search filter:', results.length, 'courses');
     }
