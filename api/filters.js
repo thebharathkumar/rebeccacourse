@@ -1,41 +1,73 @@
 const fs = require('fs');
 const path = require('path');
 
-let coursesCache = null;
+// Load courses data once
+const dataPath = path.join(__dirname, 'data.json');
+let coursesData = null;
 
-function loadCourses() {
-  if (coursesCache) return coursesCache;
-
-  const jsonPath = path.join(__dirname, 'data.json');
-  try {
-    coursesCache = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-    console.log(`Loaded ${coursesCache.length} courses`);
-  } catch (e) {
-    console.error('Error loading courses:', e);
-    coursesCache = [];
+function getCourses() {
+  if (!coursesData) {
+    try {
+      const rawData = fs.readFileSync(dataPath, 'utf8');
+      coursesData = JSON.parse(rawData);
+      console.log(`[filters] Loaded ${coursesData.length} courses from data.json`);
+    } catch (error) {
+      console.error('[filters] Error loading data:', error);
+      coursesData = [];
+    }
   }
-  return coursesCache;
+  return coursesData;
 }
 
 module.exports = (req, res) => {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
-  const courses = loadCourses();
-  const getUnique = (key) => [...new Set(courses.map(c => c[key]).filter(v => v))].sort();
+  if (req.method !== 'GET') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
 
-  res.json({
-    programs: getUnique('study_abroad_program'),
-    credits: getUnique('foreign_course_credits'),
-    aoks: getUnique('aok'),
-    schools: getUnique('pace_school'),
-    departments: getUnique('pace_department')
-  });
+  try {
+    const courses = getCourses();
+
+    // Extract unique values for each filter
+    const programs = [...new Set(courses.map(c => c.study_abroad_program).filter(Boolean))].sort();
+    const credits = [...new Set(courses.map(c => String(c.foreign_course_credits)).filter(Boolean))].sort((a, b) => {
+      const numA = parseFloat(a);
+      const numB = parseFloat(b);
+      return numA - numB;
+    });
+    const aoks = [...new Set(courses.map(c => c.aok).filter(Boolean))].sort();
+    const schools = [...new Set(courses.map(c => c.pace_school).filter(Boolean))].sort();
+    const departments = [...new Set(courses.map(c => c.pace_department).filter(Boolean))].sort();
+
+    const result = {
+      programs,
+      credits,
+      aoks,
+      schools,
+      departments
+    };
+
+    console.log('[filters] Returning filters:', {
+      programs: programs.length,
+      credits: credits.length,
+      aoks: aoks.length,
+      schools: schools.length,
+      departments: departments.length
+    });
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('[filters] Error:', error);
+    res.status(500).json({ error: 'Internal server error', message: error.message });
+  }
 };
