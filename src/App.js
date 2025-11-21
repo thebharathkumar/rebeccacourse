@@ -243,8 +243,8 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <img
-              src="/Pace-International-SingleLine-FlushLeft-2Color-PMS.jpg"
-              alt="Pace University International"
+              src="/Pace-EducationAbroad-SingleLineLeft-2Color-RGB - CLEAR background.png"
+              alt="Pace University Education Abroad"
               className="h-12"
             />
             <Link to="/admin" className="text-gray-500 hover:text-gray-700 text-sm">
