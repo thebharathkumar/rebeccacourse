@@ -152,10 +152,18 @@ function HomePage() {
 
   // Fetch filter options
   useEffect(() => {
-    fetch(`${API_BASE}/api/filters`, { credentials: 'include' })
-      .then(r => r.json())
-      .then(setFilters)
-      .catch(console.error);
+    fetch(`${API_BASE}/api/filters`)
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to fetch filters');
+        return r.json();
+      })
+      .then(data => {
+        console.log('Filters loaded:', data);
+        setFilters(data);
+      })
+      .catch(err => {
+        console.error('Error loading filters:', err);
+      });
   }, []);
 
   // Fetch courses with debounce
@@ -173,13 +181,21 @@ function HomePage() {
       params.set('order', sort.order);
     }
 
-    fetch(`${API_BASE}/api/courses?${params}`, { credentials: 'include' })
-      .then(r => r.json())
+    console.log('Fetching courses with params:', params.toString());
+    fetch(`${API_BASE}/api/courses?${params}`)
+      .then(r => {
+        if (!r.ok) throw new Error('Failed to fetch courses');
+        return r.json();
+      })
       .then(data => {
+        console.log('Courses loaded:', data.length);
         setCourses(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(err => {
+        console.error('Error loading courses:', err);
+        setLoading(false);
+      });
   }, [search, selectedFilters, sort]);
 
   useEffect(() => {
