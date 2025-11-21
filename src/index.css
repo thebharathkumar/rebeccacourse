@@ -8,7 +8,15 @@ body {
 }
 
 .pace-gradient {
-  background: linear-gradient(135deg, #002d72 0%, #003d8f 50%, #0052b4 100%);
+  background: linear-gradient(135deg, #002D72 0%, #003d8f 100%);
+}
+
+.pace-dark {
+  color: #002D72;
+}
+
+.pace-light {
+  color: #5DADE2;
 }
 
 .tag-aok {

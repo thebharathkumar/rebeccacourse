@@ -203,14 +203,17 @@ function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="pace-gradient text-white">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+      <header className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold">Pace University</h1>
-              <p className="text-blue-200">Course Equivalency Search</p>
+              <h1 className="text-2xl font-bold tracking-tight">
+                <span style={{color: '#002D72'}}>PACE </span>
+                <span style={{color: '#5DADE2'}}>UNIVERSITY</span>
+              </h1>
+              <p style={{color: '#5DADE2'}} className="text-sm font-medium">International</p>
             </div>
-            <Link to="/admin" className="text-blue-200 hover:text-white text-sm">
+            <Link to="/admin" className="text-gray-500 hover:text-gray-700 text-sm">
               Admin
             </Link>
           </div>
@@ -345,15 +348,18 @@ function AdminPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="pace-gradient text-white">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      <header className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <p className="text-blue-200">Manage Course Database</p>
+            <h1 className="text-2xl font-bold tracking-tight">
+              <span style={{color: '#002D72'}}>PACE </span>
+              <span style={{color: '#5DADE2'}}>UNIVERSITY</span>
+            </h1>
+            <p style={{color: '#5DADE2'}} className="text-sm font-medium">Admin Dashboard</p>
           </div>
           <div className="flex gap-4">
-            <Link to="/" className="text-blue-200 hover:text-white text-sm">View Site</Link>
-            <button onClick={handleLogout} className="text-blue-200 hover:text-white text-sm">Logout</button>
+            <Link to="/" className="text-gray-500 hover:text-gray-700 text-sm">View Site</Link>
+            <button onClick={handleLogout} className="text-gray-500 hover:text-gray-700 text-sm">Logout</button>
           </div>
         </div>
       </header>
