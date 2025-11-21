@@ -13,7 +13,7 @@ let users = [{ id: 1, username: 'Rebslotkin', password: 'SA2026' }];
 
 // Load data from JSON or Excel
 function loadData() {
-  const jsonPath = path.join(__dirname, '..', 'data', 'courses.json');
+  const jsonPath = path.join(__dirname, 'courses.json');
   const excelPath = path.join(__dirname, '..', 'VIEW ONLY Pre-Approved Foreign Courses Database.xlsx');
 
   // Try JSON first
@@ -54,11 +54,6 @@ function loadData() {
         }
       }
       console.log(`Loaded ${courses.length} courses from Excel`);
-
-      // Save as JSON for faster loading
-      const dataDir = path.join(__dirname, '..', 'data');
-      if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-      fs.writeFileSync(jsonPath, JSON.stringify(courses, null, 2));
     } catch (e) {
       console.log('Error loading Excel:', e.message);
     }
