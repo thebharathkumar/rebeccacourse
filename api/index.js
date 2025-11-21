@@ -1,242 +1,152 @@
 const express = require('express');
 const cors = require('cors');
-const session = require('express-session');
-const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const XLSX = require('xlsx');
-const Database = require('better-sqlite3');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Database setup
-const dbPath = process.env.NODE_ENV === 'production' ? '/tmp/courses.db' : './courses.db';
-const db = new Database(dbPath);
+// In-memory data store (for Vercel serverless)
+let courses = [];
+let users = [{ id: 1, username: 'Rebslotkin', password: 'SA2026' }];
 
-// Create tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS courses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    foreign_course_title TEXT,
-    foreign_course_code TEXT,
-    foreign_course_credits TEXT,
-    home_course_title TEXT,
-    aok TEXT,
-    home_course_code TEXT,
-    study_abroad_program TEXT,
-    course_notes TEXT,
-    pace_school TEXT,
-    pace_department TEXT
-  );
-
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE,
-    password TEXT
-  );
-`);
-
-// Insert default admin user
-const bcrypt = require('bcryptjs');
-const hashedPassword = bcrypt.hashSync('SA2026', 10);
-try {
-  db.prepare('INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)').run('Rebslotkin', hashedPassword);
-} catch (e) {}
-
-// Seed database from Excel
-function seedDatabase() {
-  const count = db.prepare('SELECT COUNT(*) as count FROM courses').get();
-  if (count.count > 0) return;
-
+// Load data from JSON or Excel
+function loadData() {
+  const jsonPath = path.join(__dirname, '..', 'data', 'courses.json');
   const excelPath = path.join(__dirname, '..', 'VIEW ONLY Pre-Approved Foreign Courses Database.xlsx');
-  try {
-    const workbook = XLSX.readFile(excelPath);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-    // Skip first row (instructions), second row is headers
-    const insert = db.prepare(`
-      INSERT INTO courses (foreign_course_title, foreign_course_code, foreign_course_credits,
-        home_course_title, aok, home_course_code, study_abroad_program, course_notes, pace_school, pace_department)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+  // Try JSON first
+  if (fs.existsSync(jsonPath)) {
+    try {
+      courses = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      console.log(`Loaded ${courses.length} courses from JSON`);
+      return;
+    } catch (e) {
+      console.log('Error loading JSON:', e.message);
+    }
+  }
 
-    const insertMany = db.transaction((rows) => {
-      for (const row of rows) {
+  // Fall back to Excel
+  if (fs.existsSync(excelPath)) {
+    try {
+      const workbook = XLSX.readFile(excelPath);
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+      courses = [];
+      for (let i = 2; i < data.length; i++) {
+        const row = data[i];
         if (row[0] && row[0] !== 'Foreign Course Title') {
-          insert.run(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
+          courses.push({
+            id: i - 1,
+            foreign_course_title: row[0] || '',
+            foreign_course_code: row[1] || '',
+            foreign_course_credits: row[2] || '',
+            home_course_title: row[3] || '',
+            aok: row[4] || '',
+            home_course_code: row[5] || '',
+            study_abroad_program: row[6] || '',
+            course_notes: row[7] || '',
+            pace_school: row[8] || '',
+            pace_department: row[9] || ''
+          });
         }
       }
-    });
+      console.log(`Loaded ${courses.length} courses from Excel`);
 
-    insertMany(data.slice(2));
-    console.log('Database seeded successfully');
-  } catch (e) {
-    console.log('Excel file not found or error seeding:', e.message);
+      // Save as JSON for faster loading
+      const dataDir = path.join(__dirname, '..', 'data');
+      if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+      fs.writeFileSync(jsonPath, JSON.stringify(courses, null, 2));
+    } catch (e) {
+      console.log('Error loading Excel:', e.message);
+    }
   }
 }
 
-seedDatabase();
+loadData();
 
 // Middleware
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
-app.use(session({
-  secret: 'pace-course-secret-2024',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
-}));
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '..', 'build')));
-}
+// Simple token auth (stateless for serverless)
+const AUTH_TOKEN = process.env.AUTH_TOKEN || 'pace-admin-token-2024';
 
-// Auth middleware
-function requireAuth(req, res, next) {
-  if (req.session && req.session.user) {
-    next();
-  } else {
-    res.status(401).json({ error: 'Unauthorized' });
-  }
+function checkAuth(req) {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  return token === AUTH_TOKEN;
 }
 
 // API Routes
 app.get('/api/courses', (req, res) => {
   const { search, program, credits, aok, school, department, sort, order } = req.query;
 
-  let query = 'SELECT * FROM courses WHERE 1=1';
-  const params = [];
+  let results = [...courses];
 
   if (search) {
-    query += ` AND (foreign_course_title LIKE ? OR home_course_title LIKE ? OR foreign_course_code LIKE ? OR home_course_code LIKE ?)`;
-    const searchTerm = `%${search}%`;
-    params.push(searchTerm, searchTerm, searchTerm, searchTerm);
+    const s = search.toLowerCase();
+    results = results.filter(c =>
+      (c.foreign_course_title || '').toLowerCase().includes(s) ||
+      (c.home_course_title || '').toLowerCase().includes(s) ||
+      (c.foreign_course_code || '').toLowerCase().includes(s) ||
+      (c.home_course_code || '').toLowerCase().includes(s)
+    );
   }
-  if (program) {
-    query += ' AND study_abroad_program = ?';
-    params.push(program);
-  }
-  if (credits) {
-    query += ' AND foreign_course_credits = ?';
-    params.push(credits);
-  }
-  if (aok) {
-    query += ' AND aok LIKE ?';
-    params.push(`%${aok}%`);
-  }
-  if (school) {
-    query += ' AND pace_school = ?';
-    params.push(school);
-  }
-  if (department) {
-    query += ' AND pace_department = ?';
-    params.push(department);
-  }
+  if (program) results = results.filter(c => c.study_abroad_program === program);
+  if (credits) results = results.filter(c => c.foreign_course_credits === credits);
+  if (aok) results = results.filter(c => (c.aok || '').includes(aok));
+  if (school) results = results.filter(c => c.pace_school === school);
+  if (department) results = results.filter(c => c.pace_department === department);
 
   if (sort) {
-    const validSorts = ['foreign_course_title', 'home_course_title', 'study_abroad_program', 'pace_school', 'pace_department'];
-    if (validSorts.includes(sort)) {
-      query += ` ORDER BY ${sort} ${order === 'desc' ? 'DESC' : 'ASC'}`;
-    }
+    results.sort((a, b) => {
+      const aVal = (a[sort] || '').toLowerCase();
+      const bVal = (b[sort] || '').toLowerCase();
+      return order === 'desc' ? bVal.localeCompare(aVal) : aVal.localeCompare(bVal);
+    });
   }
 
-  const courses = db.prepare(query).all(...params);
-  res.json(courses);
+  res.json(results);
 });
 
 app.get('/api/filters', (req, res) => {
-  const programs = db.prepare('SELECT DISTINCT study_abroad_program FROM courses WHERE study_abroad_program IS NOT NULL AND study_abroad_program != "" ORDER BY study_abroad_program').all();
-  const credits = db.prepare('SELECT DISTINCT foreign_course_credits FROM courses WHERE foreign_course_credits IS NOT NULL AND foreign_course_credits != "" ORDER BY foreign_course_credits').all();
-  const aoks = db.prepare('SELECT DISTINCT aok FROM courses WHERE aok IS NOT NULL AND aok != "" ORDER BY aok').all();
-  const schools = db.prepare('SELECT DISTINCT pace_school FROM courses WHERE pace_school IS NOT NULL AND pace_school != "" ORDER BY pace_school').all();
-  const departments = db.prepare('SELECT DISTINCT pace_department FROM courses WHERE pace_department IS NOT NULL AND pace_department != "" ORDER BY pace_department').all();
+  const getUnique = (key) => [...new Set(courses.map(c => c[key]).filter(v => v))].sort();
 
   res.json({
-    programs: programs.map(p => p.study_abroad_program),
-    credits: credits.map(c => c.foreign_course_credits),
-    aoks: aoks.map(a => a.aok),
-    schools: schools.map(s => s.pace_school),
-    departments: departments.map(d => d.pace_department)
+    programs: getUnique('study_abroad_program'),
+    credits: getUnique('foreign_course_credits'),
+    aoks: getUnique('aok'),
+    schools: getUnique('pace_school'),
+    departments: getUnique('pace_department')
   });
 });
 
 // Auth routes
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
-  const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username);
+  const user = users.find(u => u.username === username && u.password === password);
 
-  if (user && bcrypt.compareSync(password, user.password)) {
-    req.session.user = { id: user.id, username: user.username };
-    res.json({ success: true, username: user.username });
+  if (user) {
+    res.json({ success: true, token: AUTH_TOKEN, username: user.username });
   } else {
     res.status(401).json({ error: 'Invalid credentials' });
   }
 });
 
-app.post('/api/logout', (req, res) => {
-  req.session.destroy();
-  res.json({ success: true });
+app.get('/api/admin/stats', (req, res) => {
+  if (!checkAuth(req)) return res.status(401).json({ error: 'Unauthorized' });
+
+  const programs = new Set(courses.map(c => c.study_abroad_program).filter(v => v));
+  res.json({ totalCourses: courses.length, totalPrograms: programs.size });
 });
 
-app.get('/api/auth/check', (req, res) => {
-  if (req.session && req.session.user) {
-    res.json({ authenticated: true, username: req.session.user.username });
-  } else {
-    res.json({ authenticated: false });
-  }
-});
-
-// Admin routes
-const upload = multer({ dest: '/tmp/uploads/' });
-
-app.post('/api/admin/upload', requireAuth, upload.single('file'), (req, res) => {
-  try {
-    const workbook = XLSX.readFile(req.file.path);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-    // Clear existing data
-    db.prepare('DELETE FROM courses').run();
-
-    // Insert new data
-    const insert = db.prepare(`
-      INSERT INTO courses (foreign_course_title, foreign_course_code, foreign_course_credits,
-        home_course_title, aok, home_course_code, study_abroad_program, course_notes, pace_school, pace_department)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    const insertMany = db.transaction((rows) => {
-      for (const row of rows) {
-        if (row[0] && row[0] !== 'Foreign Course Title') {
-          insert.run(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]);
-        }
-      }
-    });
-
-    insertMany(data.slice(2));
-    res.json({ success: true, count: data.length - 2 });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
-
-app.get('/api/admin/stats', requireAuth, (req, res) => {
-  const total = db.prepare('SELECT COUNT(*) as count FROM courses').get();
-  const programs = db.prepare('SELECT COUNT(DISTINCT study_abroad_program) as count FROM courses').get();
-  res.json({ totalCourses: total.count, totalPrograms: programs.count });
-});
-
-// Catch-all for React in production
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
 }
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
 module.exports = app;

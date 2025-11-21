@@ -12,7 +12,7 @@ function SearchBar({ value, onChange }) {
         placeholder="Search courses, programs, or course codes..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+        className="w-full px-6 py-4 text-lg text-gray-800 bg-white border-2 border-gray-200 rounded-xl shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
       />
       <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -263,25 +263,23 @@ function AdminPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [stats, setStats] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/auth/check`, { credentials: 'include' })
-      .then(r => r.json())
-      .then(data => {
-        if (data.authenticated) {
-          setAuthenticated(true);
-          fetchStats();
-        }
-      });
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      setAuthenticated(true);
+      fetchStats(token);
+    }
   }, []);
 
-  const fetchStats = () => {
-    fetch(`${API_BASE}/api/admin/stats`, { credentials: 'include' })
+  const fetchStats = (token) => {
+    fetch(`${API_BASE}/api/admin/stats`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
       .then(r => r.json())
-      .then(setStats);
+      .then(setStats)
+      .catch(() => {});
   };
 
   const handleLogin = async (e) => {
@@ -290,46 +288,22 @@ function AdminPage() {
     const res = await fetch(`${API_BASE}/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ username, password })
     });
     if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('adminToken', data.token);
       setAuthenticated(true);
-      fetchStats();
+      fetchStats(data.token);
     } else {
       setError('Invalid credentials');
     }
   };
 
-  const handleLogout = async () => {
-    await fetch(`${API_BASE}/api/logout`, { method: 'POST', credentials: 'include' });
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
     setAuthenticated(false);
     navigate('/');
-  };
-
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    setUploading(true);
-    setMessage('');
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const res = await fetch(`${API_BASE}/api/admin/upload`, {
-      method: 'POST',
-      credentials: 'include',
-      body: formData
-    });
-    const data = await res.json();
-    setUploading(false);
-
-    if (res.ok) {
-      setMessage(`Successfully uploaded ${data.count} courses!`);
-      fetchStats();
-    } else {
-      setMessage(`Error: ${data.error}`);
-    }
   };
 
   if (!authenticated) {
@@ -400,21 +374,12 @@ function AdminPage() {
             </div>
           )}
 
-          {/* Upload */}
+          {/* Info */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 className="font-semibold text-gray-800 mb-4">Upload New Excel File</h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Upload a new Excel file to replace the current course database. The file should match the format of the original database.
+            <h3 className="font-semibold text-gray-800 mb-4">Database Information</h3>
+            <p className="text-sm text-gray-500">
+              To update courses, replace the Excel file in the repository and redeploy.
             </p>
-            <input
-              type="file"
-              accept=".xlsx,.xls"
-              onChange={handleUpload}
-              disabled={uploading}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-            />
-            {uploading && <p className="mt-2 text-blue-600">Uploading...</p>}
-            {message && <p className={`mt-2 ${message.startsWith('Error') ? 'text-red-500' : 'text-green-600'}`}>{message}</p>}
           </div>
         </div>
       </main>
