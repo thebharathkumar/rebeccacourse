@@ -74,10 +74,10 @@ function FilterPanel({ filters, selected, onChange, onReset }) {
 function ResultsTable({ courses, sort, onSort }) {
   const columns = [
     { key: 'study_abroad_program', label: 'Program' },
-    { key: 'foreign_course_title', label: 'Foreign Course' },
-    { key: 'foreign_course_code', label: 'Code' },
-    { key: 'foreign_course_credits', label: 'Credits' },
-    { key: 'home_course_title', label: 'Pace Equivalent' },
+    { key: 'foreign_course_title', label: 'Foreign Course Title' },
+    { key: 'foreign_course_code', label: 'Foreign Course Code' },
+    { key: 'foreign_course_credits', label: 'Foreign Course Credits' },
+    { key: 'home_course_title', label: 'Pace Equivalent Course' },
     { key: 'home_course_code', label: 'Pace Code' },
     { key: 'aok', label: 'AOK' },
     { key: 'pace_department', label: 'Department' },
