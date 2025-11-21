@@ -18,7 +18,7 @@ module.exports = (req, res) => {
 
     let results = courses;
 
-    // Apply filters
+    // Apply search filter - searches across ALL fields
     if (search) {
       const s = search.toLowerCase();
       results = results.filter(c =>
@@ -26,7 +26,12 @@ module.exports = (req, res) => {
         (c.foreign_course_code && c.foreign_course_code.toLowerCase().includes(s)) ||
         (c.home_course_title && c.home_course_title.toLowerCase().includes(s)) ||
         (c.home_course_code && c.home_course_code.toLowerCase().includes(s)) ||
-        (c.study_abroad_program && c.study_abroad_program.toLowerCase().includes(s))
+        (c.study_abroad_program && c.study_abroad_program.toLowerCase().includes(s)) ||
+        (c.foreign_course_credits && String(c.foreign_course_credits).toLowerCase().includes(s)) ||
+        (c.aok && c.aok.toLowerCase().includes(s)) ||
+        (c.pace_school && c.pace_school.toLowerCase().includes(s)) ||
+        (c.pace_department && c.pace_department.toLowerCase().includes(s)) ||
+        (c.course_notes && c.course_notes.toLowerCase().includes(s))
       );
     }
 
